@@ -1,2 +1,3 @@
 var dt = dayjs()
-console.log(dt.$y);
+$("#currentDay").text(dt.format("dddd, MMM DD, YYYY"));
+console.log(dt);
