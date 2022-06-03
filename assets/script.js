@@ -19,7 +19,7 @@ function createRows(){
             textArea.addClass("present");
         } else if (day.get("h") > i){
             textArea.removeClass("present");
-            textArea.addClass("future");
+            textArea.addClass("past");
         } else {
             textArea.removeClass("present");
             textArea.addClass("future");
@@ -36,14 +36,14 @@ function createRows(){
     
     function checkTime(){
         let timer = setInterval(()=>{
-            currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:m:sa"));
+            currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mm:ssa"));
         }, 1000);
     }
 }
 
 function checkTime(){
     let timer = setInterval(()=>{
-        currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mm:sa"));
+        currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mm:ssa"));
     }, 1000);
 }
 
