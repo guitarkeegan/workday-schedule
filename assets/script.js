@@ -2,27 +2,29 @@ let day = dayjs()
 let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:mma"));
 
 
-var jumbotronDiv = $(".container");
-var saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
-var saveBtn = $("<button class='col-md-2 saveBtn'></button>").append(saveIcon);
+const jumbotronDiv = $(".container");
+const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 
 function createRows(){
     for (let i=9; i<18; i++){
-        var row = $(`<div data-item=${i}>`).addClass("row");
-        var saveBtn = $("<button class='col-md-2 saveBtn'></button>").append(saveIcon);
-        var hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
+        let row = $(`<div data-item=${i}>`).addClass("row");
+        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").append(saveIcon);
+        let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
         .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
     
-        var textArea = $("<textarea class='description col-md-8' placeholder='add event here'></textarea>")
+        let textArea = $("<textarea class='description col-md-8' placeholder='add event here'></textarea>")
         if (day.get("h") === i){
+            textArea.removeClass("future")
             textArea.addClass("present");
         } else if (day.get("h") > i){
             textArea.removeClass("present");
             textArea.addClass("past");
-            
+            textArea.attr("disabled", "disabled");
+            saveBtn.attr("disabled", "disabled");
         } else {
             textArea.removeClass("present");
             textArea.addClass("future");
+            
         }
     
     
