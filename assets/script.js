@@ -1,12 +1,11 @@
 let day = dayjs()
-let currentDatetime = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:mm:ssa"));
+let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:mma"));
 
 
 var jumbotronDiv = $(".container");
 var saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 var saveBtn = $("<button class='col-md-2 saveBtn'></button>").append(saveIcon);
 
-// TODO: create all 8 rows with for loop
 function createRows(){
     for (let i=9; i<18; i++){
         var row = $(`<div data-item=${i}>`).addClass("row");
@@ -20,6 +19,7 @@ function createRows(){
         } else if (day.get("h") > i){
             textArea.removeClass("present");
             textArea.addClass("past");
+            
         } else {
             textArea.removeClass("present");
             textArea.addClass("future");
@@ -34,16 +34,11 @@ function createRows(){
         jumbotronDiv.append()
     }
     
-    function checkTime(){
-        let timer = setInterval(()=>{
-            currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mm:ssa"));
-        }, 1000);
-    }
 }
 
 function checkTime(){
     let timer = setInterval(()=>{
-        currentDatetime = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mm:ssa"));
+        currentDatetimeEl = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mma"));
     }, 1000);
 }
 
