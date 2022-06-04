@@ -8,7 +8,7 @@ const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 function createRows(){
     for (let i=9; i<18; i++){
         let row = $(`<div data-item=${i}>`).addClass("row");
-        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").append(saveIcon);
+        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").html(saveIcon);
         let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
         .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
     
