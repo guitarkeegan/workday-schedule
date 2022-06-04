@@ -8,7 +8,7 @@ const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 function createRows(){
     for (let i=9; i<18; i++){
         let row = $(`<div data-item=${i}>`).addClass("row");
-        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").html(saveIcon);
+        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").attr("name", i);
         let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
         .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
     
@@ -44,9 +44,17 @@ function checkTime(){
     }, 1000);
 }
 
+// function getEvents(hour){
+//     const text = localStorage.getItem(hour);
+//     $(`.row[data-item=${hour}]`).children()[1].text(text);
+// }
+
 checkTime();
 createRows();
-// TODO: color-code center divs for past, present, or future
-// TODO: add on click feature to edit center div
-// TODO: create button to save the text into the center div
+
 // TODO: save tasks in local storage
+$(".saveBtn").on("click",(e)=>{
+    const rowNum = e.target.name;
+    const text = $(`.row[data-item=${rowNum}]`).children()[1].value; // val() not working here
+    localStorage.setItem(rowNum, text);
+});
