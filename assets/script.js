@@ -44,13 +44,19 @@ function checkTime(){
     }, 1000);
 }
 
-// function getEvents(hour){
-//     const text = localStorage.getItem(hour);
-//     $(`.row[data-item=${hour}]`).children()[1].text(text);
-// }
+function getEvents(hour){
+    const text = localStorage.getItem(hour);
+    if (text !== null){
+        $(`.row[data-item=${hour}]`).children("textarea").text(text);
+    }
+}
 
 checkTime();
 createRows();
+
+for (let i=9; i<jumbotronDiv.children().length + 9; i++){
+    getEvents(i);
+}
 
 // TODO: save tasks in local storage
 $(".saveBtn").on("click",(e)=>{
