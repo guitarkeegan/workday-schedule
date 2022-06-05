@@ -1,8 +1,9 @@
 let day = dayjs()
 let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:mma"));
+const jumbotronEl = $(".jumbotron");
 
 
-const jumbotronDiv = $(".container");
+const containerEl = $(".container");
 const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 
 function createRows(){
@@ -28,12 +29,12 @@ function createRows(){
         }
     
     
-        jumbotronDiv.append(row);
+        containerEl.append(row);
         row.append(hourDiv);
         row.append(textArea);
         row.append(saveBtn);
     
-        jumbotronDiv.append()
+        containerEl.append()
     }
     
 }
@@ -51,16 +52,21 @@ function getEvents(hour){
     }
 }
 
+// function successAlert(){
+//     const alert = $("<div id='liveAlertPlaceholder'>");
+
+// }
+
 checkTime();
 createRows();
 
-for (let i=9; i<jumbotronDiv.children().length + 9; i++){
+for (let i=9; i<containerEl.children().length + 9; i++){
     getEvents(i);
 }
 
-// TODO: save tasks in local storage
+// save tasks in local storage
 $(".saveBtn").on("click",(e)=>{
     const rowNum = e.target.name;
-    const text = $(`.row[data-item=${rowNum}]`).children()[1].value; // val() not working here
+    const text = $(`.row[data-item=${rowNum}]`).children("textarea").val();
     localStorage.setItem(rowNum, text);
 });
