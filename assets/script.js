@@ -75,6 +75,12 @@ $(".saveBtn").on("click", (e) => {
     if (text) {
         localStorage.setItem(rowNum, text);
         successAlert();
+    } else {
+        if (localStorage.getItem(rowNum) !== null){
+            localStorage.removeItem(rowNum);
+            // deleteAlert()
+        }
+        
     }
 
 
