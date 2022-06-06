@@ -60,11 +60,11 @@ function successAlert(addOrDelete) {
     const alertEl = $("<div id='liveAlertPlaceholder'>");
     jumbotronEl.append(alertEl);
     if (addOrDelete === "a"){
-        const messageEl = $("<p>").text("✅Event Added!✅");
+        const messageEl = $("<p>").text("✅ Event Added! ✅");
         alertEl.append(messageEl)
         setTimeout(()=> alertEl.empty(), 2000);
     } else {
-        const messageEl = $("<p>").text("❌Event Deleted❌");
+        const messageEl = $("<p>").text("❌ Event Deleted ❌");
         alertEl.append(messageEl)
         setTimeout(()=> alertEl.empty(), 2000);
     }
