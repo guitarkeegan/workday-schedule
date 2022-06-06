@@ -1,12 +1,13 @@
+// create dayjs object for working with time
 let day = dayjs()
 let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:mma"));
+// create html elements
 const jumbotronEl = $(".jumbotron");
-
-
 const containerEl = $(".container");
 const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
 
 function createRows() {
+    // create row for each hour of the work day.
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
         let saveBtn = $("<button class='col-md-2 saveBtn'></button>").attr("name", i);
@@ -14,6 +15,7 @@ function createRows() {
             .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
 
         let textArea = $("<textarea class='description col-md-8' placeholder='add event here'></textarea>")
+        // change color and 'disabled' attr based on past, present or future
         if (day.get("h") === i) {
             textArea.removeClass("future")
             textArea.addClass("present");
@@ -28,7 +30,6 @@ function createRows() {
 
         }
 
-
         containerEl.append(row);
         row.append(hourDiv);
         row.append(textArea);
@@ -38,13 +39,13 @@ function createRows() {
     }
 
 }
-
+// continuously update the time
 function checkTime() {
     let timer = setInterval(() => {
         currentDatetimeEl = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mma"));
     }, 1000);
 }
-
+// get any saved events from local storage and display on the schedule
 function getEvents(hour) {
     const text = localStorage.getItem(hour);
     if (text !== null) {
@@ -54,7 +55,7 @@ function getEvents(hour) {
     //     localStorage.clear();
     // }
 }
-
+// give user feedback when anything is added or deleted from local storage.
 function successAlert(addOrDelete) {
     const alertEl = $("<div id='liveAlertPlaceholder'>");
     jumbotronEl.append(alertEl);
@@ -69,7 +70,7 @@ function successAlert(addOrDelete) {
     }
     
 }
-
+// on page load
 checkTime();
 createRows();
 
