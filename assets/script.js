@@ -50,15 +50,24 @@ function getEvents(hour) {
     if (text !== null) {
         $(`.row[data-item=${hour}]`).children("textarea").text(text);
     }
+    // } else if (day.get("h") > 17 && day.get("h") < 24){
+    //     localStorage.clear();
+    // }
 }
 
-function successAlert() {
+function successAlert(addOrDelete) {
     const alertEl = $("<div id='liveAlertPlaceholder'>");
     jumbotronEl.append(alertEl);
-    const messageEl = $("<p>").text("✅Event Added!✅");
-    alertEl.append(messageEl)
-    setTimeout(()=> alertEl.empty(), 2000);
-
+    if (addOrDelete === "a"){
+        const messageEl = $("<p>").text("✅Event Added!✅");
+        alertEl.append(messageEl)
+        setTimeout(()=> alertEl.empty(), 2000);
+    } else {
+        const messageEl = $("<p>").text("❌Event Deleted❌");
+        alertEl.append(messageEl)
+        setTimeout(()=> alertEl.empty(), 2000);
+    }
+    
 }
 
 checkTime();
@@ -68,17 +77,17 @@ for (let i = 9; i < containerEl.children().length + 9; i++) {
     getEvents(i);
 }
 
-// save tasks in local storage
+// save tasks in local storage and call successAlert function
 $(".saveBtn").on("click", (e) => {
     const rowNum = e.target.name;
     const text = $(`.row[data-item=${rowNum}]`).children("textarea").val();
     if (text) {
-        localStorage.setItem(rowNum, text);
-        successAlert();
+        localStorage.setItem(rowNum, text.trim());
+        successAlert("a");
     } else {
         if (localStorage.getItem(rowNum) !== null){
             localStorage.removeItem(rowNum);
-            // deleteAlert()
+            successAlert("d");
         }
         
     }
