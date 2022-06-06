@@ -4,13 +4,14 @@ let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:
 // create html elements
 const jumbotronEl = $(".jumbotron");
 const containerEl = $(".container");
-const saveIcon = $("<i class='fa-solid fa-floppy-disk'></i>");
+const saveIcon = "<i class='fa-solid fa-floppy-disk'></i>";
 
 function createRows() {
     // create row for each hour of the work day.
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
         let saveBtn = $("<button class='col-md-2 saveBtn'></button>").attr("name", i);
+        saveBtn.html(saveIcon);
         let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
             .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
 
@@ -22,8 +23,6 @@ function createRows() {
         } else if (day.get("h") > i) {
             textArea.removeClass("present");
             textArea.addClass("past");
-            textArea.attr("disabled", "disabled");
-            saveBtn.attr("disabled", "disabled");
         } else {
             textArea.removeClass("present");
             textArea.addClass("future");
@@ -51,9 +50,7 @@ function getEvents(hour) {
     if (text !== null) {
         $(`.row[data-item=${hour}]`).children("textarea").text(text);
     }
-    // } else if (day.get("h") > 17 && day.get("h") < 24){
-    //     localStorage.clear();
-    // }
+
 }
 // give user feedback when anything is added or deleted from local storage.
 function successAlert(addOrDelete) {
