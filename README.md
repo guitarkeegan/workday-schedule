@@ -14,7 +14,7 @@ after they click the save button.
 Contributors names and contact info
 
 Keegan Anglim  
-ex. [@NageekDBeat](https://twitter.com/nageekdbeat)
+[@NageekDBeat](https://twitter.com/nageekdbeat)
 
 ## Version History
 
