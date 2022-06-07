@@ -85,7 +85,7 @@ for (let i = 9; i < containerEl.children().length + 9; i++) {
 }
 
 // save tasks in local storage and call successAlert function
-$(".saveBtn i").on("click", (e) => {
+$(".saveBtn").on("click", (e) => {
     
     const rowNum = e.target.name;
     const text = $(`.row[data-item=${rowNum}]`).children("textarea").val();
