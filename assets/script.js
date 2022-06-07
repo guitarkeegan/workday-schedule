@@ -9,9 +9,11 @@ function createRows() {
     // create row for each hour of the work day.
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
+        row.css("z-index", 0);
         let saveIcon = `<i id='${i}' class='fa-solid fa-floppy-disk'></i>`;
         let saveBtn = $("<button class='col-2 saveBtn'></button>").attr("name", i);
         saveBtn.html(saveIcon);
+        saveBtn.css("cursor", "default");
         let hourDiv = $(`<div class='col-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
             .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
 
@@ -37,10 +39,11 @@ function createRows() {
     }
 
 }
-// continuously update the time
+// continuously update the time and refresh the page at the top of the hour
 function checkTime() {
     let timer = setInterval(() => {
         currentDatetimeEl = $("#currentDay").text(dayjs().format("dddd, MMM DD, YYYY, h:mma"));
+        if (dayjs().second() === 0 && dayjs().minute() === 0) {document.location.reload()} 
     }, 1000);
 }
 // get any saved events from local storage and display on the schedule
