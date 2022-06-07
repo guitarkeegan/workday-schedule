@@ -15,6 +15,7 @@ Contributors names and contact info
 
 Keegan Anglim
 [email](mailto:keegananglim@gmail.com)
+
 [@NageekDBeat](https://twitter.com/nageekdbeat)
 
 ## Version History
