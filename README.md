@@ -13,7 +13,8 @@ after they click the save button.
 
 Contributors names and contact info
 
-Keegan Anglim  
+Keegan Anglim
+[email](mailto:keegananglim@gmail.com)
 [@NageekDBeat](https://twitter.com/nageekdbeat)
 
 ## Version History
@@ -24,3 +25,7 @@ Keegan Anglim
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Preview
+
+![Preview](./assets/WorkdayScheduler.gif)

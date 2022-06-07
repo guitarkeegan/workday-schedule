@@ -6,7 +6,7 @@ const jumbotronEl = $(".jumbotron");
 const containerEl = $(".container");
 
 function createRows() {
-    // create row for each hour of the work day.
+    // create row for each hour of the work day. change z-index of row so that toaster shows on mobile
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
         row.css("z-index", 0);
@@ -55,11 +55,9 @@ function getEvents(hour) {
 }
 // give user feedback when anything is added or deleted from local storage.
 function successAlert(addOrDelete, rowNum) {
-    console.log(addOrDelete, rowNum);
     const toastWrapperEl = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>");
     const toastRow = $(`.row[data-item=${rowNum}]`);
     if (addOrDelete === "a"){
-        console.log("triggered");
         const liveToastEl = $('#liveToast');
         const toast = new bootstrap.Toast(liveToastEl);
         $(".toast-body").text("✅ Event Added! ✅")
