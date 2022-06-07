@@ -53,17 +53,26 @@ function getEvents(hour) {
 
 }
 // give user feedback when anything is added or deleted from local storage.
-function successAlert(addOrDelete) {
-    const alertEl = $("<div id='liveAlertPlaceholder'>");
-    jumbotronEl.append(alertEl);
+function successAlert(addOrDelete, rowNum) {
+    // const alertEl = $("<div id='liveAlertPlaceholder'>");
+    // jumbotronEl.append(alertEl);
+    console.log(addOrDelete, rowNum);
+    const toastWrapperEl = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>");
+    const toastRow = $(`.row[data-item=${rowNum}]`);
     if (addOrDelete === "a"){
-        const messageEl = $("<p>").text("✅ Event Added! ✅");
-        alertEl.append(messageEl)
-        setTimeout(()=> alertEl.empty(), 2000);
+        const toastBodyEl = $("<div class='toast-body'>").text("✅ Event Added! ✅");
+        toastWrapperEl.append(toastBodyEl);
+        toastRow.append(toastWrapperEl);
+        // const messageEl = $("<p>").text("✅ Event Added! ✅");
+        // alertEl.append(messageEl)
+        // setTimeout(()=> alertEl.empty(), 2000);
     } else {
-        const messageEl = $("<p>").text("❌ Event Deleted ❌");
-        alertEl.append(messageEl)
-        setTimeout(()=> alertEl.empty(), 2000);
+        const toastBodyEl = $("<div class='toast-body'>").text("❌ Event Deleted ❌");
+        toastWrapperEl.append(toastBodyEl);
+        toastRow.append(toastWrapperEl);
+        // const messageEl = $("<p>").text("❌ Event Deleted ❌");
+        // alertEl.append(messageEl)
+        // setTimeout(()=> alertEl.empty(), 2000);
     }
     
 }
@@ -76,16 +85,17 @@ for (let i = 9; i < containerEl.children().length + 9; i++) {
 }
 
 // save tasks in local storage and call successAlert function
-$(".saveBtn").on("click", (e) => {
+$(".saveBtn i").on("click", (e) => {
+    
     const rowNum = e.target.name;
     const text = $(`.row[data-item=${rowNum}]`).children("textarea").val();
     if (text) {
         localStorage.setItem(rowNum, text.trim());
-        successAlert("a");
+        successAlert("a", rowNum);
     } else {
         if (localStorage.getItem(rowNum) !== null){
             localStorage.removeItem(rowNum);
-            successAlert("d");
+            successAlert("d", rowNum);
         }
         
     }
