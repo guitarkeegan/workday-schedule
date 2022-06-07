@@ -4,12 +4,13 @@ let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:
 // create html elements
 const jumbotronEl = $(".jumbotron");
 const containerEl = $(".container");
-const saveIcon = "<i class='fa-solid fa-floppy-disk'></i>";
+
 
 function createRows() {
     // create row for each hour of the work day.
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
+        let saveIcon = `<i id='${i}' class='fa-solid fa-floppy-disk'></i>`;
         let saveBtn = $("<button class='col-md-2 saveBtn'></button>").attr("name", i);
         saveBtn.html(saveIcon);
         let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
@@ -61,15 +62,15 @@ function successAlert(addOrDelete, rowNum) {
     const toastRow = $(`.row[data-item=${rowNum}]`);
     if (addOrDelete === "a"){
         const toastBodyEl = $("<div class='toast-body'>").text("✅ Event Added! ✅");
-        toastWrapperEl.append(toastBodyEl);
-        toastRow.append(toastWrapperEl);
+        toastWrapperEl.prepend(toastBodyEl);
+        toastRow.prepend(toastWrapperEl);
         // const messageEl = $("<p>").text("✅ Event Added! ✅");
         // alertEl.append(messageEl)
         // setTimeout(()=> alertEl.empty(), 2000);
     } else {
         const toastBodyEl = $("<div class='toast-body'>").text("❌ Event Deleted ❌");
-        toastWrapperEl.append(toastBodyEl);
-        toastRow.append(toastWrapperEl);
+        toastWrapperEl.prepend(toastBodyEl);
+        toastRow.prepend(toastWrapperEl);
         // const messageEl = $("<p>").text("❌ Event Deleted ❌");
         // alertEl.append(messageEl)
         // setTimeout(()=> alertEl.empty(), 2000);
@@ -85,9 +86,9 @@ for (let i = 9; i < containerEl.children().length + 9; i++) {
 }
 
 // save tasks in local storage and call successAlert function
-$(".saveBtn").on("click", (e) => {
-    
-    const rowNum = e.target.name;
+$("i").on("click", (e) => {
+    e.stopPropagation();
+    const rowNum = e.target.id;
     const text = $(`.row[data-item=${rowNum}]`).children("textarea").val();
     if (text) {
         localStorage.setItem(rowNum, text.trim());
@@ -97,7 +98,6 @@ $(".saveBtn").on("click", (e) => {
             localStorage.removeItem(rowNum);
             successAlert("d", rowNum);
         }
-        
     }
 
 
