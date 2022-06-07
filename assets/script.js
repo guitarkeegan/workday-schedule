@@ -10,12 +10,12 @@ function createRows() {
     for (let i = 9; i < 18; i++) {
         let row = $(`<div data-item=${i}>`).addClass("row");
         let saveIcon = `<i id='${i}' class='fa-solid fa-floppy-disk'></i>`;
-        let saveBtn = $("<button class='col-md-2 saveBtn'></button>").attr("name", i);
+        let saveBtn = $("<button class='col-2 saveBtn'></button>").attr("name", i);
         saveBtn.html(saveIcon);
-        let hourDiv = $(`<div class='col-md-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
+        let hourDiv = $(`<div class='col-2 time-block hour d-flex align-items-center justify-content-center'></div>`)
             .text(day.set("h", i).set("m", 0).set("s", 0).format("hA"));
 
-        let textArea = $("<textarea class='description col-md-8' placeholder='add event here'></textarea>")
+        let textArea = $("<textarea class='description col-8' placeholder='add event here'></textarea>")
         // change color and 'disabled' attr based on past, present or future
         if (day.get("h") === i) {
             textArea.removeClass("future")

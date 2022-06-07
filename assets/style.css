@@ -76,10 +76,8 @@ textarea{
   margin-left: auto;
 }
 
-@media screen and (max-width: 792px){
+@media screen and (max-width: 576px){
   .saveBtn i:hover {
     font-size: 40px;
   }
-  
-
 }
