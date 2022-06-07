@@ -5,7 +5,6 @@ let currentDatetimeEl = $("#currentDay").text(day.format("dddd, MMM DD, YYYY, h:
 const jumbotronEl = $(".jumbotron");
 const containerEl = $(".container");
 
-
 function createRows() {
     // create row for each hour of the work day.
     for (let i = 9; i < 18; i++) {
@@ -27,7 +26,6 @@ function createRows() {
         } else {
             textArea.removeClass("present");
             textArea.addClass("future");
-
         }
 
         containerEl.append(row);
@@ -51,31 +49,24 @@ function getEvents(hour) {
     if (text !== null) {
         $(`.row[data-item=${hour}]`).children("textarea").text(text);
     }
-
 }
 // give user feedback when anything is added or deleted from local storage.
 function successAlert(addOrDelete, rowNum) {
-    // const alertEl = $("<div id='liveAlertPlaceholder'>");
-    // jumbotronEl.append(alertEl);
     console.log(addOrDelete, rowNum);
     const toastWrapperEl = $("<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>");
     const toastRow = $(`.row[data-item=${rowNum}]`);
     if (addOrDelete === "a"){
-        const toastBodyEl = $("<div class='toast-body'>").text("✅ Event Added! ✅");
-        toastWrapperEl.prepend(toastBodyEl);
-        toastRow.prepend(toastWrapperEl);
-        // const messageEl = $("<p>").text("✅ Event Added! ✅");
-        // alertEl.append(messageEl)
-        // setTimeout(()=> alertEl.empty(), 2000);
+        console.log("triggered");
+        const liveToastEl = $('#liveToast');
+        const toast = new bootstrap.Toast(liveToastEl);
+        $(".toast-body").text("✅ Event Added! ✅")
+        toast.show()
     } else {
-        const toastBodyEl = $("<div class='toast-body'>").text("❌ Event Deleted ❌");
-        toastWrapperEl.prepend(toastBodyEl);
-        toastRow.prepend(toastWrapperEl);
-        // const messageEl = $("<p>").text("❌ Event Deleted ❌");
-        // alertEl.append(messageEl)
-        // setTimeout(()=> alertEl.empty(), 2000);
-    }
-    
+        const liveToastEl = $('#liveToast');
+        const toast = new bootstrap.Toast(liveToastEl);
+        $(".toast-body").text("❌ Event Deleted ❌")
+        toast.show()
+    } 
 }
 // on page load
 checkTime();
@@ -99,6 +90,4 @@ $("i").on("click", (e) => {
             successAlert("d", rowNum);
         }
     }
-
-
 });
